@@ -1,0 +1,70 @@
+{% extends 'dashbase.html' %}
+
+{% block title %} Welcome to the home page {% endblock %}
+
+
+{% block body %} 
+
+{{session['authenticated']}}
+
+ 
+
+<div class="container">
+  
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card">
+        <h5 class="card-header">Start a New Group</h5>
+        <div class="card-body">
+          <p class="card-text">Create a group and add your friends to get this party started.</p>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Create Group
+          </button>
+          <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">New Group</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default">Group Name</span>
+          <input type="text" name = "group_name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+      
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+          <input type="text" name="group_description" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <h5 class="card-header">My Groups</h5>
+        <div class="card-body">
+          
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+          {% for group in groups %}
+          <p class="card-text"><a href="/{{group['_id']}}">{{group['group_name']}}</a></p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
